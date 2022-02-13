@@ -13,3 +13,34 @@ function generatePin() {
     const pin = getPin();
     document.getElementById('display-pin').value = pin;
 }
+
+document.getElementById('key-pad').addEventListener('click', function (event) {
+    const number = event.target.innerText;
+    const calcInput = document.getElementById('typed-numbers');
+    if (isNaN(number)) {
+        if (number == 'C') {
+            calcInput.value = '';
+        }
+    }
+    else {
+        const previousNumber = calcInput.value;
+        const newNumber = previousNumber + number;
+        calcInput.value = newNumber;
+    }
+})
+
+function notifyPin() {
+    const pin = document.getElementById('display-pin').value;
+    const typedNumbers = document.getElementById('typed-numbers').value;
+    const failedMsg = document.getElementById('failed-msg');
+    const successMsg = document.getElementById('success-msg');
+    
+    if (pin == typedNumbers) {
+        successMsg.style.display = 'block';
+        failedMsg.style.display = 'none';
+    }
+    else {
+        successMsg.style.display = 'none';
+        failedMsg.style.display = 'block';
+    }
+}
